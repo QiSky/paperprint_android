@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PaperPrint</string>
+
+    <string name="login_phone_hint">Please enter phone number</string>
+    <string name="login_phone_hint_text">*An account will be created automatically after logging in with an unregistered mobile number</string>
+    <string name="login_phone_switch_text">Mobile number login</string>
+    <string name="login_password_switch_text">Password login</string>
+    <string name="login_next_text">Login</string>
+</resources>

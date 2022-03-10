@@ -7,11 +7,14 @@ package com.skyqi.module_base.http;///
 ///
 public interface ApiManager {
 
-    String REST_URL = "";
+    String REST_URL = "http://127.0.0.1";
 
     ///短信、密码登陆
-    String REST_LOGIN_CODE = "/user/login/code";
+    String REST_LOGIN_CODE = "/user/login";
 
     ///token自动登陆
     String REST_LOGIN_TOKEN = "/user/login/token";
+
+    ///短信验证发送
+    String REST_LOGIN_SMS = "/user/login/sms";
 }

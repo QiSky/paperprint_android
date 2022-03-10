@@ -2,6 +2,7 @@ package com.skyqi.module_base.http;///
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skyqi.module_base.data.DataManager;
 import com.skyqi.module_base.model.view_model.ApplicationViewModel;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,8 +29,6 @@ public class HttpManager {
 
     private Gson mDataFormat;
 
-    ApplicationViewModel mApplicationViewModel;
-
     private static final class Single {
         private static final HttpManager INSTANCE = new HttpManager();
     }
@@ -44,26 +43,26 @@ public class HttpManager {
         return Single.INSTANCE;
     }
 
-    public void initUrl(String baseUrl,  ApplicationViewModel applicationViewModel) {
+    public void initUrl(String baseUrl) {
         this.mBaseUrl = baseUrl;
-        this.mApplicationViewModel = applicationViewModel;
     }
 
-    public Retrofit getRetrofit() {
+    public <T> T createService(final Class<T> service) {
         Retrofit retrofit = mRetrofitConcurrentHashMap.get(mBaseUrl);
         if (retrofit == null) {
-            throw new RuntimeException("baseUrl为空");
+            retrofit = createRetrofit(mBaseUrl);
+            mRetrofitConcurrentHashMap.putIfAbsent(mBaseUrl, retrofit);
         }
-        return retrofit;
+        return retrofit.create(service);
     }
 
-    public Retrofit getRetrofit(String baseUrl) {
+    public <T> T createService(String baseUrl, final Class<T> service) {
         Retrofit retrofit = mRetrofitConcurrentHashMap.get(baseUrl);
         if (retrofit == null) {
             retrofit = createRetrofit(baseUrl);
             mRetrofitConcurrentHashMap.putIfAbsent(baseUrl, retrofit);
         }
-        return retrofit;
+        return retrofit.create(service);
     }
 
     private Retrofit createRetrofit(String baseUrl) {
@@ -85,10 +84,9 @@ public class HttpManager {
                     .header("Accept-Language", "zh-CN,zh;q=0.8")
                     .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*")
                     .header("Connection", "Keep-Alive");
-            if(mApplicationViewModel.getUserModel() != null && mApplicationViewModel.getUserModel().getToken() != null) {
-                requestBuilder.addHeader("token", mApplicationViewModel.getUserModel().getToken());
+            if(DataManager.userModel != null && DataManager.userModel.getToken() != null) {
+                requestBuilder.addHeader("token", DataManager.userModel.getToken());
             }
-            requestBuilder.addHeader();
             Request request = requestBuilder.build();
             return chain.proceed(request);
         });

@@ -10,4 +10,8 @@ public interface RouteBase {
     String SPLASH = "/app/splash";
 
     String LOGIN = "/app/login/login";
+
+    String LOGIN_SMS = "/app/login/sms";
+
+    String HOME = "/app/product/home";
 }

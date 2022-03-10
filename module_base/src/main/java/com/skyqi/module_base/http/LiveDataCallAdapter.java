@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.skyqi.module_base.BuildConfig;
 import com.skyqi.module_base.model.ApiResponse;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +56,9 @@ public class LiveDataCallAdapter<T> implements CallAdapter<T, LiveData<T>>, Http
 
                         @Override
                         public void onFailure(Call<T> call, Throwable t) {
-                            Log.d(TAG, t.getStackTrace().toString());
+                            if (BuildConfig.DEBUG) {
+                                Log.d(TAG, t.getStackTrace().toString());
+                            }
                             postValue(null);
                         }
                     });

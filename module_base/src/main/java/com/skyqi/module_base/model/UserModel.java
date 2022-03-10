@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.hannesdorfmann.parcelableplease.annotation.Bagger;
 import com.hannesdorfmann.parcelableplease.annotation.ParcelablePlease;
-import com.skyqi.module_base.bagger.IntegerBagger;
 
 import java.util.List;
 

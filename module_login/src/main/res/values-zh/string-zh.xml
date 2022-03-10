@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">钰印</string>
+
+    <string name="login_phone_hint">请输入手机号</string>
+    <string name="login_phone_hint_text">*未注册的手机号登录后将自动创建账户</string>
+    <string name="login_phone_switch_text">手机号登录</string>
+    <string name="login_password_switch_text">密码登录</string>
+    <string name="login_next_text">登录</string>
+</resources>

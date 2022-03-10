@@ -19,9 +19,14 @@ public interface LoginService extends ApiManager {
 
     @FormUrlEncoded
     @POST(REST_LOGIN_CODE)
-    LiveData<ApiResponse<UserModel>> loginCode(@Field("phone") String phone, @Field("code") String code, @Field("type") int type);
+    LiveData<ApiResponse<UserModel>> login(@Field("phone") String phone, @Field("code") String code, @Field("type") int type);
 
     @FormUrlEncoded
     @POST(REST_LOGIN_TOKEN)
     LiveData<ApiResponse<UserModel>> loginToken();
+
+    @FormUrlEncoded
+    @POST(REST_LOGIN_SMS)
+    LiveData<ApiResponse<Object>> sendSMS(@Field("phone") String phone);
+
 }

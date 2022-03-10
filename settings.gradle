@@ -10,3 +10,4 @@ rootProject.name = "paperprint"
 include ':app'
 include ':module_login'
 include ':module_base'
+include ':module_production'
