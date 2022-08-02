@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.icu.util.TimeUnit;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -16,16 +15,23 @@ import com.skyqi.module_base.model.ApiResponse;
 import com.skyqi.module_base.model.UserModel;
 import com.skyqi.module_base.route.RouteBase;
 import com.skyqi.module_base.route.RouteManager;
+import com.skyqi.module_base.utils.ToastUtil;
 import com.skyqi.module_base.view.VerifyEditText;
 import com.skyqi.module_base.view.activity.BaseViewModelActivity;
 import com.skyqi.module_login.databinding.ActivitySmsBinding;
 import com.skyqi.module_login.login.view_model.LoginViewModel;
 import com.skyqi.module_login.login.view_model.SmsViewModel;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 @Route(path = RouteBase.LOGIN_SMS)
 public class SmsActivity extends BaseViewModelActivity {
@@ -43,21 +49,21 @@ public class SmsActivity extends BaseViewModelActivity {
         setContentView(mActivitySmsBinding.getRoot());
         String phone = getIntent().getStringExtra(DataConstant.LOGIN_PHONE_KEY);
         mActivitySmsBinding.tvSmsTips.setText("验证码已发送至:" + phone.substring(0, 3) + "*******");
-        mSmsViewModel.getSecondsLiveData.observe(this, new Observer<int>() {
+        mSmsViewModel.getSecondsLiveData().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(int i) {
+            public void onChanged(Integer i) {
                 mActivitySmsBinding.tvSmsResend.setText("重新发送(" + i + ")");
                 mActivitySmsBinding.tvSmsResend.setTextColor(com.skyqi.module_base.R.color.second_font_color);
             }
         });
-        mSmsViewModel.getIsPostLiveData().observe(this, new Observer<boolean>() {
+        mSmsViewModel.getIsPostLiveData().observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(boolean b) {
+            public void onChanged(Boolean b) {
                 if (b) {
                     mActivitySmsBinding.tvSmsResend.setText("发送验证码");
                     mActivitySmsBinding.tvSmsResend.setTextColor(com.skyqi.module_base.R.color.primaryColor);
                 } else {
-                    mSmsViewModel.getSecondsLiveData.postValue(60);
+                    mSmsViewModel.getSecondsLiveData().postValue(60);
                 }
             }
         });
@@ -69,40 +75,24 @@ public class SmsActivity extends BaseViewModelActivity {
                     RouteManager.getInstance().navigateTo(RouteBase.HOME);
                     finish();
                 } else {
-                    ///TODO 验证码认证失败
-                    mActivitySmsBinding.vedtSmsCode.clear();
+                    ToastUtil.showToast(getApplicationContext(), "登录失败");
                 }
             }
         }));
         mActivitySmsBinding.tvSmsResend.setOnClickListener(v -> {
             if (mSmsViewModel.getIsPostLiveData().getValue()) {
-                getCode();
+                getCode(phone);
             }
         });
-        getCode();
+        getCode(phone);
     }
 
-    private void getCode() {
+    private void getCode(String phone) {
         mLoginViewModel.getSmsAction(phone).observe(this, new Observer<ApiResponse<Object>>() {
             @Override
             public void onChanged(ApiResponse<Object> objectApiResponse) {
                 mSmsViewModel.setIsPostLiveData(false);
-                startTimeCount();
-            }
-        });
-    }
-
-    private void startTimeCount() {
-        Disposable mDisposable = Observable.interval(1, TimeUnit.SECOND).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(Long aLong) throws Exception {
-                int data = mSmsViewModel.getSecondsLiveData.getValue();
-                if (data > 0) {
-                    mSmsViewModel.getSecondsLiveData.postValue(--data);
-                } else {
-                    mSmsViewModel.getIsPostLiveData().postValue(true);
-                    mDisposable.dispose();
-                }
+                mSmsViewModel.startTimeCount(SmsActivity.this);
             }
         });
     }

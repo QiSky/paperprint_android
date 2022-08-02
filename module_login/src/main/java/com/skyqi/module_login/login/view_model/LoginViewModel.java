@@ -2,6 +2,7 @@ package com.skyqi.module_login.login.view_model;///
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.skyqi.module_base.MainApplication;
 import com.skyqi.module_base.data.DataConstant;
 import com.skyqi.module_base.http.HttpManager;
 import com.skyqi.module_base.http.service.LoginService;
@@ -20,6 +22,7 @@ import com.skyqi.module_base.model.view_model.ApplicationViewModel;
 import com.skyqi.module_base.route.RouteBase;
 import com.skyqi.module_base.route.RouteManager;
 import com.skyqi.module_base.utils.DataValidator;
+import com.skyqi.module_base.utils.ToastUtil;
 import com.skyqi.module_login.login.constant.LoginType;
 import com.tencent.mmkv.MMKV;
 
@@ -52,7 +55,7 @@ public class LoginViewModel extends ViewModel {
             UserModel userModel = mmkv.decodeParcelable(USERSTOREFLAG, UserModel.class);
             loginTokenCallBack.getLiveData(mLoginService.loginToken());
         } else {
-            RouteManager.getInstance().navigateTo(RouteBase.LOGIN);
+            RouteManager.getInstance().navigateTo(RouteBase.HOME, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
     }
 
@@ -76,7 +79,7 @@ public class LoginViewModel extends ViewModel {
                 return null;
             }
         } else {
-            ///TODO 手机验证失败
+            ToastUtil.showToast(MainApplication.instance, "手机号格式错误");
             return null;
         }
     }

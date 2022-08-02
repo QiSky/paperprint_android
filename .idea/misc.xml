@@ -4,18 +4,31 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="../../Library/Android/sdk/platforms/android-31/data/res/drawable/list_selector_background.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.14764492753623187" />
+        <entry key="app/src/main/res/menu/menu_home_navigation.xml" value="0.16614583333333333" />
         <entry key="module_base/src/main/res/drawable/bg_splash.xml" value="0.1" />
         <entry key="module_base/src/main/res/drawable/bg_verify_item.xml" value="0.1" />
         <entry key="module_base/src/main/res/drawable/drawable_splash_background.xml" value="0.1" />
         <entry key="module_base/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="module_base/src/main/res/layout/center_title_appbar.xml" value="0.11666666666666667" />
+        <entry key="module_base/src/main/res/layout/layout_center_title_appbar.xml" value="0.30181884765625" />
+        <entry key="module_home/src/main/res/layout/activity_home.xml" value="0.25060882568359377" />
+        <entry key="module_home/src/main/res/layout/fragment_menu_production.xml" value="0.1" />
+        <entry key="module_home/src/main/res/menu/menu_home_navigation.xml" value="0.10729166666666666" />
         <entry key="module_login/src/main/res/drawable/selector_login_btn.xml" value="0.1" />
         <entry key="module_login/src/main/res/drawable/shape_normal_button_bg_active.xml" value="0.1" />
         <entry key="module_login/src/main/res/drawable/shape_normal_button_bg_inactive.xml" value="0.1" />
         <entry key="module_login/src/main/res/drawable/shape_normal_button_bg_selected.xml" value="0.1" />
-        <entry key="module_login/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="module_login/src/main/res/layout/activity_login.xml" value="0.18142242431640626" />
         <entry key="module_login/src/main/res/layout/activity_sms.xml" value="0.17766265869140627" />
-        <entry key="module_production/src/main/res/layout/activity_home.xml" value="0.12902069091796875" />
+        <entry key="module_login/src/main/res/menu/menu_home_navigation.xml" value="0.1" />
+        <entry key="module_message/src/main/res/layout/fragment_message_list.xml" value="0.1" />
+        <entry key="module_message/src/main/res/layout/item_adapter_message_list.xml" value="0.1089758736746651" />
+        <entry key="module_production/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="module_production/src/main/res/layout/fragment_menu_production.xml" value="0.10885416666666667" />
+        <entry key="module_production/src/main/res/menu/menu_home_navigation.xml" value="0.1626235961914063" />
       </map>
     </option>
   </component>

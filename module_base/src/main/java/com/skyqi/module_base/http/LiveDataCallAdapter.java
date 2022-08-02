@@ -42,7 +42,7 @@ public class LiveDataCallAdapter<T> implements CallAdapter<T, LiveData<T>>, Http
     @Override
     public LiveData<T> adapt(Call<T> call) {
         return new LiveData<T>() {
-            private AtomicBoolean started = new AtomicBoolean(false);
+            private final AtomicBoolean started = new AtomicBoolean(false);
 
             @Override
             protected void onActive() {

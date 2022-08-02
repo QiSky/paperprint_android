@@ -39,8 +39,8 @@ public class VerifyEditText extends LinearLayout {
     private final static int DEFAULT_ITEM_SIZE = 100;
     //默认每个 item 的间距为 50
     private final static int DEFAULT_ITEM_MARGIN = 50;
-    //默认每个 item 的字体大小为 14
-    private final static int DEFAULT_ITEM_TEXT_SIZE = 14;
+    //默认每个 item 的字体大小为 20
+    private final static int DEFAULT_ITEM_TEXT_SIZE = 20;
 
     private final List<TextView> mTextViewList = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class VerifyEditText extends LinearLayout {
         });
         for (int i = 0; i < count; i++) {
             TextView textView = new TextView(context);
-            textView.setTextSize(UnitConverter.sp2px(context, textViewSize));
+            textView.setTextSize(fontSize);
             textView.setGravity(Gravity.CENTER);
             textView.setTextColor(Color.BLACK);
             LayoutParams layoutParams = new LayoutParams(UnitConverter.dp2px(context, textViewSize), UnitConverter.dp2px(context, textViewSize));
@@ -134,6 +134,7 @@ public class VerifyEditText extends LinearLayout {
 
     }
 
+    ///清除显示数据
     public void clear() {
         mEditText.setText("");
         mTextViewList.forEach(item -> {

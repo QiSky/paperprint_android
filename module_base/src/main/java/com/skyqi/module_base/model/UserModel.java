@@ -17,10 +17,13 @@ import java.util.List;
 @ParcelablePlease
 public class UserModel implements Parcelable {
 
+    ///令牌
     public String token;
 
+    ///手机号
     public String phone;
 
+    ///权限
     public int[] permission;
 
     public String getToken() {

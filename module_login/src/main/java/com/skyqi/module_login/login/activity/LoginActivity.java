@@ -18,6 +18,7 @@ import com.skyqi.module_base.model.UserModel;
 import com.skyqi.module_base.model.view_model.ApplicationViewModel;
 import com.skyqi.module_base.route.RouteBase;
 import com.skyqi.module_base.route.RouteManager;
+import com.skyqi.module_base.utils.ToastUtil;
 import com.skyqi.module_base.view.activity.BaseViewModelActivity;
 import com.skyqi.module_login.R;
 import com.skyqi.module_login.databinding.ActivityLoginBinding;
@@ -49,12 +50,12 @@ public class LoginActivity extends BaseViewModelActivity {
             protected void onSingleClick(View v) {
                 LoginType loginType = mLoginViewModel.getLoginType().getValue();
                 if (loginType == LoginType.MESSAGE) {
-                    mActivityLoginBinding.edtLoginPassword.setVisibility(View.INVISIBLE);
-                    mActivityLoginBinding.tvLoginHintText.setVisibility(View.VISIBLE);
-                    mLoginViewModel.postLoginType(LoginType.PASSWORD);
-                } else if (loginType == LoginType.PASSWORD) {
                     mActivityLoginBinding.edtLoginPassword.setVisibility(View.VISIBLE);
                     mActivityLoginBinding.tvLoginHintText.setVisibility(View.INVISIBLE);
+                    mLoginViewModel.postLoginType(LoginType.PASSWORD);
+                } else if (loginType == LoginType.PASSWORD) {
+                    mActivityLoginBinding.edtLoginPassword.setVisibility(View.INVISIBLE);
+                    mActivityLoginBinding.tvLoginHintText.setVisibility(View.VISIBLE);
                     mLoginViewModel.postLoginType(LoginType.MESSAGE);
                 }
             }
@@ -68,18 +69,21 @@ public class LoginActivity extends BaseViewModelActivity {
                         liveData.observe(LoginActivity.this, new Observer<ApiResponse<UserModel>>() {
                             @Override
                             public void onChanged(ApiResponse<UserModel> userModelApiResponse) {
+                                RouteManager.getInstance().navigateTo(RouteBase.HOME);
+                                finish();
                                 if (userModelApiResponse != null && HttpCode.SUCCESS == userModelApiResponse.getCode()) {
                                     mLoginViewModel.saveData(LoginActivity.this, getApplication(), userModelApiResponse.getData());
                                     RouteManager.getInstance().navigateTo(RouteBase.HOME);
                                     finish();
                                 } else {
-                                    /// TODO 请求失败
+                                    ToastUtil.showToast(getApplicationContext(), "登录失败");
                                 }
                             }
                         });
                     }
                 } else {
                     /// TODO 不点击同意处理
+                    ToastUtil.showToast(getApplicationContext(), "请先同意条款");
                 }
             }
         });

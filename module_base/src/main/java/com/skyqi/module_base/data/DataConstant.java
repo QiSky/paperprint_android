@@ -9,4 +9,5 @@ public interface DataConstant {
 
     String LOGIN_PHONE_KEY = "login_phone_key";
 
+    String MESSAGE_CHANNEL_ID = "message_channel_id";
 }

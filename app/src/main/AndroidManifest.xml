@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Paperprint"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="app"
-        android:name=".initializer.MainApplication"
+        android:name="com.skyqi.module_base.MainApplication"
         tools:targetApi="p">
         <provider
             android:name="androidx.startup.InitializationProvider"

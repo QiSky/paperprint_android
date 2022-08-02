@@ -21,13 +21,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 ///
 public class HttpManager {
 
+    ///多实例保存
     private final ConcurrentHashMap<String, Retrofit> mRetrofitConcurrentHashMap;
 
-    private final long mConnectTime = 8000;
+    ///超时时间
+    private final long mConnectTime = 9000;
 
     private String mBaseUrl = null;
 
-    private Gson mDataFormat;
+    private final Gson mDataFormat;
 
     private static final class Single {
         private static final HttpManager INSTANCE = new HttpManager();

@@ -7,11 +7,15 @@ package com.skyqi.module_base.route;///
 ///
 public interface RouteBase {
 
-    String SPLASH = "/app/splash";
+    String SPLASH = "/splash/index";
 
-    String LOGIN = "/app/login/login";
+    String LOGIN = "/login/home";
 
-    String LOGIN_SMS = "/app/login/sms";
+    String LOGIN_SMS = "/login/sms";
 
-    String HOME = "/app/product/home";
+    String HOME = "/home/index";
+
+    String MESSAGE_CHANNEL = "/message/channel";
+
+    String MESSAGE_DETAIL = "/message/detail";
 }

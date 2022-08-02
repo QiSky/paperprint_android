@@ -50,4 +50,11 @@ public class RouteManager {
     public void navigateTo(String path, Bundle bundle, int requestCode, Activity mContext) {
         ARouter.getInstance().build(path).with(bundle).navigation(mContext, requestCode);
     }
+
+    public void clearAllActivity() {
+        activityList.forEach(item -> {
+            item.get().finish();
+        });
+        activityList.clear();
+    }
 }

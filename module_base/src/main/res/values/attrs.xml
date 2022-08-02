@@ -7,4 +7,5 @@
         <attr name="item_text_size" format="integer"/>
         <attr name="item_background" format="reference"/>
     </declare-styleable>
+
 </resources>

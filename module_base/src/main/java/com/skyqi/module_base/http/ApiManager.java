@@ -17,4 +17,8 @@ public interface ApiManager {
 
     ///短信验证发送
     String REST_LOGIN_SMS = "/user/login/sms";
+
+    ///获取消息频道
+    String REST_MESSAGE_CHANNEL = "/message/channel/list";
+
 }
